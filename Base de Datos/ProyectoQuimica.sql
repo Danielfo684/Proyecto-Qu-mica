@@ -4,6 +4,9 @@ USE QUIMICOS;
 
 -- Estructura de tabla para la tabla Usuario
 
+
+--La tabla usuario puede que no nos haga falta porque ya
+-- el propio mysql te trae un sistema de gestión de usuarios que ya he programao en java
 DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario (
 	idUsuario INT PRIMARY KEY IDENTITY,
@@ -13,6 +16,9 @@ CREATE TABLE Usuario (
 	apellidos VARCHAR(255) NOT NULL,
 	esProfesor BIT NOT NULL -- BIT == BOOLEAN
 ); 
+
+--Nos falta una tabla de localización que hace referencia a los distintos almacenes
+
 
 -- Creación de la tabla de Ubicacion
 
@@ -36,6 +42,8 @@ CREATE TABLE ProductoQuimico (
 	stockMinimo INT,
 	FOREIGN KEY (idUbicacion) REFERENCES Ubicacion(idUbicacion)
 );
+
+-- Nos falta la table de productos auxiliares, que es la tercera especialización de productoQuimico
 
 --Creación de la tabla Reactivo
 
