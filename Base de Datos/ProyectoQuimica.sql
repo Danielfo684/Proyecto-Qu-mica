@@ -8,13 +8,13 @@ DROP TABLE IF EXISTS Usuario;
 CREATE TABLE Usuario (
 	idUsuario INT PRIMARY KEY IDENTITY,
 	nombreUsuario VARCHAR(255) UNIQUE NOT NULL,
-	contrase帽a VARCHAR(255) NOT NULL,
+	contrase馻 VARCHAR(255) NOT NULL,
 	nombre VARCHAR(255) NOT NULL,
 	apellidos VARCHAR(255) NOT NULL,
 	esProfesor BIT NOT NULL -- BIT == BOOLEAN
 ); 
 
--- Creaci贸n de la tabla de Ubicacion
+-- Creaci髇 de la tabla de Ubicacion
 
 DROP TABLE IF EXISTS Ubicacion;
 CREATE TABLE Ubicacion (
@@ -37,7 +37,7 @@ CREATE TABLE ProductoQuimico (
 	FOREIGN KEY (idUbicacion) REFERENCES Ubicacion(idUbicacion)
 );
 
---Creaci贸n de la tabla Reactivo
+--Creaci髇 de la tabla Reactivo
 
 DROP TABLE IF EXISTS Reactivo;
 CREATE TABLE Reactivo (
@@ -58,7 +58,7 @@ CREATE TABLE Material (
 	idProducto INT NOT NULL,
 	Subcategoria VARCHAR(50) NOT NULL,
     CONSTRAINT CK_Subcategoria 
-        CHECK (Subcategoria IN ('Pl谩stico', 'Cristal', 'Instrumental Electr贸nico')),
+        CHECK (Subcategoria IN ('Pl醩tico', 'Cristal', 'Instrumental Electr髇ico')),
 	descripcion VARCHAR(255),
 	numeroSerie VARCHAR(100),
 	fechaCompra DATE,
@@ -70,10 +70,10 @@ DROP TABLE IF EXISTS Riesgo;
 CREATE TABLE Riesgo (
 	idRiesgo INT PRIMARY KEY IDENTITY,
 	nombre VARCHAR(255) NOT NULL,
-	pictograma VARBINARY(MAX) --Campo para almacenar im谩genes
+	pictograma VARBINARY(MAX) --Campo para almacenar im醙enes
 );
 
---Tabla de ReactivoRiesgo (Tabla de uni贸n)
+--Tabla de ReactivoRiesgo (Tabla de uni髇)
 DROP TABLE IF EXISTS ReactivoRiesgo;
 CREATE TABLE ReactivoRiesgo (
 	idReactivo INT,
@@ -82,3 +82,6 @@ CREATE TABLE ReactivoRiesgo (
 	FOREIGN KEY (idReactivo) REFERENCES Reactivo(idReactivo) ON DELETE CASCADE,
 	FOREIGN KEY (idRiesgo) REFERENCES Riesgo(idRiesgo) ON DELETE CASCADE
 );
+
+
+
