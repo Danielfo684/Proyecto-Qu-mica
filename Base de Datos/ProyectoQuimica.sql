@@ -21,7 +21,7 @@ CREATE TABLE Localizacion (
 	idLocalizacion INT PRIMARY KEY IDENTITY,
 	Almacen VARCHAR(255) NOT NULL,
 	CONSTRAINT CK_Almacen
-        CHECK (Almacen IN ('Laboratorio001', 'Laboratorio002', 'Laboratorio003' 'Laboratorio004', 'Almacen General')),
+        CHECK (Almacen IN ('Laboratorio Instrumental','Laboratorio001', 'Laboratorio002', 'Laboratorio003', 'Laboratorio004', 'Almacen General')),
 );
 
 -- Creación de la tabla de Ubicacion
