@@ -1,6 +1,6 @@
 -- Base de datos: QUIMICOS
-CREATE DATABASE IF NOT EXISTS QUIMICOS;
-USE QUIMICOS;
+CREATE DATABASE QUIMICA;
+USE QUIMICA;
 
 ---- Estructura de tabla para la tabla Usuario
 
@@ -30,13 +30,15 @@ DROP TABLE IF EXISTS Ubicacion;
 CREATE TABLE Ubicacion (
 	idUbicacion INT PRIMARY KEY IDENTITY,
 	estanteria INT,
+	idLocalizacion INT,
 	balda INT
+	FOREIGN KEY (idLocalizacion) REFERENCES Localizacion(idLocalizacion)
 );
 
 --Estructura de la tabla para la tabla ProductoQuimico
 
-DROP TABLE IF EXISTS ProductoQuimico;
-CREATE TABLE ProductoQuimico (
+DROP TABLE IF EXISTS Productos;
+CREATE TABLE Productos (
 	idProducto INT PRIMARY KEY IDENTITY,
 	nombre VARCHAR(255) NOT NULL,
 	idLocalizacion INT NOT NULL,
@@ -45,7 +47,7 @@ CREATE TABLE ProductoQuimico (
 	cantidad INT NOT NULL,
 	stockMinimo INT,
 	FOREIGN KEY (idUbicacion) REFERENCES Ubicacion(idUbicacion),
-	FOREIGN KEY (idLocalizacion) REFERENCES Localizacion(idLocalizacion)
+	
 );
 
 --Creación de la tabla Reactivo
@@ -57,7 +59,7 @@ CREATE TABLE Reactivo (
 	descripcion VARCHAR(255),
 	gradoPureza VARCHAR(50),
 	fechaCaducidad DATE,
-	FOREIGN KEY (idProducto) REFERENCES ProductoQuimico(idProducto)
+	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
 );
 
 --Estructura de la tabla para la tabla Material
@@ -73,7 +75,7 @@ CREATE TABLE Material (
 	descripcion VARCHAR(255),
 	numeroSerie VARCHAR(100),
 	fechaCompra DATE,
-	FOREIGN KEY (idProducto) REFERENCES ProductoQuimico(idProducto)
+	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
 );
 
 --Estructura de la tabla para la tabla Productos Auxiliares
@@ -83,7 +85,7 @@ CREATE TABLE ProductoAuxiliar (
 	idProductoAuxiliar INT PRIMARY KEY IDENTITY,
 	idProducto INT NOT NULL,
 	formato VARCHAR(255) NOT NULL,
-	FOREIGN KEY (idProducto) REFERENCES ProductoQuimico(idProducto)
+	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
 );
 
 --Tabla de Riesgo

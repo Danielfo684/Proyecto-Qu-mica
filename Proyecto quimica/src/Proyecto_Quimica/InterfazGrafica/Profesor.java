@@ -14,7 +14,12 @@ public class Profesor extends javax.swing.JFrame {
      * Creates new form Profesor
      */
     public Profesor() {
+        setSize(500, 500); //establece el tamaño de la ventana principal
+        setDefaultCloseOperation(EXIT_ON_CLOSE);  //Hace que el programa se 
+        // cierre al cerrar la ventana
         initComponents();
+        setTitle("Gestor de Química"); //Título para la ventana del JFrame
+        setLocationRelativeTo(null);  //nos centra la ventana de JFrame en el centro de la pantalla
     }
 
     /**
