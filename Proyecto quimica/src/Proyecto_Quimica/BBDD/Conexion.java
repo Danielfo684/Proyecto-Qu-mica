@@ -1,5 +1,5 @@
 
-package Proyecto_Quimica;
+package Proyecto_Quimica.BBDD;
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
