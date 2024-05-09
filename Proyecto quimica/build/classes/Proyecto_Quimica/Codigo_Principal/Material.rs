@@ -1,0 +1,2 @@
+Proyecto_Quimica.Codigo_Principal.Material
+Proyecto_Quimica.Codigo_Principal.Subcategorias

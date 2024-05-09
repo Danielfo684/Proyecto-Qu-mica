@@ -1,64 +1,45 @@
--- Base de datos: QUIMICOS
-CREATE DATABASE QUIMICAS;
-USE QUIMICAS;
+CREATE DATABASE QUIMICASs;
+USE QUIMICASs;
 
----- Estructura de tabla para la tabla Usuario
-
---DROP TABLE IF EXISTS Usuario;
---CREATE TABLE Usuario (
---	idUsuario INT PRIMARY KEY IDENTITY, -- El IDENTITY es igual al AUTO_INCREMENT de MySQL
---	nombreUsuario VARCHAR(255) UNIQUE NOT NULL,
---	contraseña VARCHAR(255) NOT NULL,
---	nombre VARCHAR(255) NOT NULL,
---	apellidos VARCHAR(255) NOT NULL,
---	esProfesor BIT NOT NULL -- BIT == BOOLEAN en MySQL
---); 
-
---Creación de la tabla formato para los reactivos
 CREATE TABLE formato (
-  idFormato int PRIMARY KEY,
-  nombreFormato varchar(20) NOT NULL);
+  idFormato INT PRIMARY KEY,
+  nombreFormato ENUM('1 Kg', '100 g', '250 g', '500 g', '5 g', 'No viene reflejado', '1 L', '500 mL', '5 Kg', '2,5 L', '250 mL', '100 mL', '250 g,1 kg', '10 g') NOT NULL
+);
 
-  INSERT INTO formato (IdFormato, nombreFormato) VALUES
+INSERT INTO formato (IdFormato, nombreFormato) VALUES
 (1, '1 Kg'),
 (2, '100 g'),
 (3, '250 g'),
 (4, '500 g'),
 (5, '5 g'),
-(100, 'No viene reflejado'),
-(6, '1 L'),
-(7, '500 mL'),
-(8, '5 Kg'),
-(9, '2,5 L'),
-(10, '250 mL'),
-(11, '100 mL'),
-(12, '250 g,1 kg'),
-(13, '10 g');
+(6, 'No viene reflejado'),
+(7, '1 L'),
+(8, '500 mL'),
+(9, '5 Kg'),
+(10, '2,5 L'),
+(11, '250 mL'),
+(12, '100 mL'),
+(13, '250 g,1 kg'),
+(14, '10 g');
 
---Creación de la tabla de Localizacion
-
-DROP TABLE IF EXISTS Localizacion;
 CREATE TABLE Localizacion (
-	idLocalizacion INT PRIMARY KEY IDENTITY,
-	nombreAlmacen VARCHAR(255) NOT NULL,
-	CONSTRAINT CK_nombreAlmacen
-        CHECK (nombreAlmacen IN ('Laboratorio Instrumental', 'Almacen General', 'Almacén 1/principal')),
+  idLocalizacion INT PRIMARY KEY AUTO_INCREMENT,
+  nombreAlmacen ENUM('Laboratorio Instrumental', 'Almacen General', 'Almacén 1/principal') NOT NULL
 );
-INSERT into Localizacion (nombreAlmacen) values
+
+INSERT INTO Localizacion (nombreAlmacen) VALUES
 ('Almacen General'),
 ('Laboratorio Instrumental'),
 ('Almacén 1/principal');
-select * from localizacion
--- Creación de la tabla de Ubicacion
 
-DROP TABLE IF EXISTS Ubicacion;
 CREATE TABLE Ubicacion (
-	idUbicacion INT PRIMARY KEY IDENTITY,
-	nombre VARCHAR(100) NOT NULL,
-	idLocalizacion INT,
-	FOREIGN KEY (idLocalizacion) REFERENCES Localizacion(idLocalizacion)
+  idUbicacion INT PRIMARY KEY AUTO_INCREMENT,
+  nombre VARCHAR(100) NOT NULL,
+  idLocalizacion INT,
+  FOREIGN KEY (idLocalizacion) REFERENCES Localizacion(idLocalizacion)
 );
-INSERT INTO ubicacion (nombre, idLocalizacion) VALUES
+
+INSERT INTO Ubicacion (nombre, idLocalizacion) VALUES
 ( '5N', 3),
 ( '4N', 3),
 ( '3N', 3),
@@ -73,21 +54,15 @@ INSERT INTO ubicacion (nombre, idLocalizacion) VALUES
 ( 'estantería 1,balda 4', 1),
 ( 'estantería 0, balda 4 ', 1);
 
-
-
---Estructura de la tabla para la tabla ProductoQuimico
-
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
-	idProducto INT PRIMARY KEY,
-	nombre VARCHAR(255) NOT NULL,
-	idUbicacion INT,
-	cantidad INT NOT NULL,
-	stockMinimo INT,
-	tipoProducto VARCHAR(255) NOT NULL,
-	
-	FOREIGN KEY (idUbicacion) REFERENCES Ubicacion(idUbicacion),
-	
+    idProducto INT PRIMARY KEY,
+    nombre VARCHAR(255) NOT NULL,
+    idUbicacion INT,
+    cantidad INT NOT NULL,
+    stockMinimo INT,
+    tipoProducto INT NOT NULL,
+    FOREIGN KEY (idUbicacion) REFERENCES Ubicacion(idUbicacion)
 );
 INSERT INTO productos (IdProducto, Nombre, Cantidad, StockMinimo, IdUbicacion, tipoProducto) VALUES
 (1, 'AMONIO NITRATO', 1, 1, 1, 1),
@@ -268,31 +243,31 @@ INSERT INTO productos (IdProducto, Nombre, Cantidad, StockMinimo, IdUbicacion, t
 (176, 'Potenciómetro', 1, 0, 9, 3),
 (177, 'Potenciómetro', 1, 0, 10, 3);
 
-
+ALTER TABLE Productos
+ADD COLUMN tipoProductoNuevo VARCHAR(50);
 
 UPDATE Productos
-SET tipoProducto = CASE
+SET tipoProductoNuevo = CASE
     WHEN tipoProducto = 1 THEN 'REACTIVO'
     WHEN tipoProducto = 2 THEN 'PRODUCTOAUXILIAR'
     WHEN tipoProducto = 3 THEN 'MATERIAL'
 END;
-
+ALTER TABLE Productos DROP COLUMN tipoProducto;
 ALTER TABLE Productos
-ADD CONSTRAINT CK_tipoProducto       
-CHECK (tipoProducto IN ('REACTIVO', 'PRODUCTOAUXILIAR', 'MATERIAL'));
-
---Creación de la tabla Reactivo
+CHANGE COLUMN tipoProductoNuevo tipoProducto VARCHAR(50);
+ALTER TABLE Productos
+MODIFY tipoProducto ENUM('REACTIVO', 'PRODUCTOAUXILIAR', 'MATERIAL');
 
 DROP TABLE IF EXISTS Reactivo;
 CREATE TABLE Reactivo (
-	idReactivo INT PRIMARY KEY IDENTITY,
-	idProducto INT NOT NULL,
-	descripcion VARCHAR(255),
-	gradoPureza VARCHAR(50),
-	fechaCaducidad DATE,
-	idFormato int NOT NULL,
-	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto),
-	FOREIGN KEY (idFormato) REFERENCES Formato (idformato)
+    idReactivo INT PRIMARY KEY AUTO_INCREMENT,
+    idProducto INT NOT NULL,
+    descripcion VARCHAR(255),
+    gradoPureza VARCHAR(50),
+    fechaCaducidad VARCHAR(255),
+    idFormato INT NOT NULL,
+    FOREIGN KEY (idProducto) REFERENCES Productos(idProducto),
+    FOREIGN KEY (idFormato) REFERENCES Formato (idFormato)
 );
 
 
@@ -453,72 +428,59 @@ INSERT INTO reactivo (idReactivo, gradoPureza, fechaCaducidad, idProducto, idFor
 (154, '99 %', 'No viene reflejada', 154, 1),
 (155, '99 %', 'No viene reflejada', 155, 1),
 (156, '99 %', 'No viene reflejada', 156, 3);
---Estructura de la tabla para la tabla Material
 
 DROP TABLE IF EXISTS Material;
 CREATE TABLE Material (
-	idMaterial INT PRIMARY KEY IDENTITY,
+	idMaterial INT PRIMARY KEY AUTO_INCREMENT,
 	idProducto INT NOT NULL,
-	Subcategoria VARCHAR(50) NOT NULL,
-    CONSTRAINT CK_Subcategoria 
-        CHECK (Subcategoria IN ('Plástico', 'Cristal', 'Instrumental Electrónico')),
-	--El ENUM en MySQL sería: nombre_enum ENUM('Plástico', 'Cristal', 'Instrumental Electrónico'),
+	subcategoria ENUM('plástico', 'cristal', 'Instrumental Electrónico') NOT NULL,
 	descripcion VARCHAR(255),
 	numeroSerie VARCHAR(100),
-	fechaCompra VARCHAR(50),
+	fechaCompra DATE,
 	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
-
-
 );
-INSERT INTO material ( Subcategoria, Descripcion, FechaCompra, IdProducto, NumeroSerie) VALUES
-( 'plástico ', '1000 ml', 'No viene especificada', 165, 'No viene especificado'),
-( 'plástico ', '500ml', 'No viene especificada', 166, 'No viene especificado'),
-( 'plástico ', '1000 ml ', 'No viene especificada', 167, 'No viene especificado'),
-( 'cristal', '3 L', 'No viene especificada', 168, 'No viene especificado'),
-( 'cristal ', '1000 ml', 'No viene especificada', 169, 'No viene especificado'),
-( 'cristal', '2L ', 'No viene especificada', 170, 'No viene especificado'),
-( 'cristal ', '1000 ml', 'No viene especificada', 171, 'No viene especificado'),
-( 'plástico ', '2L ', 'No viene especificada', 172, 'No viene especificado'),
-( 'cristal', '50 ml', 'No viene especificada', 173, 'No viene especificado'),
-( 'Instrumental Electrónico', 'No viene especificado', 'No viene especificada', 174, '“534031”'),
-( 'Instrumental Electrónico', 'No viene especificado', 'No viene especificada', 175, '“531030”'),
-( 'Instrumental Electrónico', 'No viene especificado', 'No viene especificada', 176, '“539010”'),
-( 'Instrumental Electrónico', 'No viene especificado', 'No viene especificada', 177, '“539007”');
 
+INSERT INTO Material (subcategoria, descripcion, fechaCompra, idProducto, numeroSerie) VALUES
+('plástico', '1000 ml', '2024-05-09', 165, 'No viene especificado'),
+('plástico', '500ml', '2024-05-09', 166, 'No viene especificado'),
+('plástico', '1000 ml', '2024-05-09', 167, 'No viene especificado'),
+('cristal', '3 L', '2024-05-09', 168, 'No viene especificado'),
+('cristal', '1000 ml', '2024-05-09', 169, 'No viene especificado'),
+('cristal', '2L', '2024-05-09', 170, 'No viene especificado'),
+('cristal', '1000 ml', '2024-05-09', 171, 'No viene especificado'),
+('plástico', '2L', '2024-05-09', 172, 'No viene especificado'),
+('cristal', '50 ml', '2024-05-09', 173, 'No viene especificado'),
+('Instrumental Electrónico', 'No viene especificado', '2024-05-09', 174, '534031'),
+('Instrumental Electrónico', 'No viene especificado', '2024-05-09', 175, '531030'),
+('Instrumental Electrónico', 'No viene especificado', '2024-05-09', 176, '539010'),
+('Instrumental Electrónico', 'No viene especificado', '2024-05-09', 177, '539007');
 
-
-
-
---Estructura de la tabla para la tabla Productos Auxiliares
 
 DROP TABLE IF EXISTS ProductoAuxiliar;
 CREATE TABLE ProductoAuxiliar (
-	idProductoAuxiliar INT PRIMARY KEY IDENTITY,
+	idProductoAuxiliar INT PRIMARY KEY AUTO_INCREMENT,
 	idProducto INT NOT NULL,
 	formato VARCHAR(255) NOT NULL,
 	FOREIGN KEY (idProducto) REFERENCES Productos(idProducto)
 );
 
-INSERT INTO ProductoAuxiliar( formato, IdProducto) VALUES
-('Plástico , verdes, medianas ', 157),
-( 'Plástico', 158),
-( 'Cristal', 159),
-( 'Plástico ', 160),
-( 'Plástico ', 161),
-( 'Plástico, metal, tela', 162),
-( 'De cerámica, 6 cuadrados enteros', 163),
-( 'Plástico ', 164);
+INSERT INTO ProductoAuxiliar (formato, idProducto) VALUES
+('Plástico , verdes, medianas', 157),
+('Plástico', 158),
+('Cristal', 159),
+('Plástico', 160),
+('Plástico', 161),
+('Plástico, metal, tela', 162),
+('De cerámica, 6 cuadrados enteros', 163),
+('Plástico', 164);
 
-
---Tabla de Riesgo
 DROP TABLE IF EXISTS Riesgo;
 CREATE TABLE Riesgo (
-	idRiesgo INT PRIMARY KEY IDENTITY,
-	nombre VARCHAR(255) NOT NULL,
-	pictograma VARBINARY(MAX) --Campo para almacenar imágenes en MySQL es un BLOB en vez de VARBINARY
+    idRiesgo INT PRIMARY KEY AUTO_INCREMENT,
+    nombre VARCHAR(255) NOT NULL,
+    pictograma BLOB
 );
 
---Tabla de ReactivoRiesgo (Tabla de unión)
 DROP TABLE IF EXISTS ReactivoRiesgo;
 CREATE TABLE ReactivoRiesgo (
 	idReactivo INT,
@@ -527,6 +489,3 @@ CREATE TABLE ReactivoRiesgo (
 	FOREIGN KEY (idReactivo) REFERENCES Reactivo(idReactivo) ON DELETE CASCADE,
 	FOREIGN KEY (idRiesgo) REFERENCES Riesgo(idRiesgo) ON DELETE CASCADE
 );
-
-
-

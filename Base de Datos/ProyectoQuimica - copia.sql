@@ -1,20 +1,10 @@
--- Base de datos: QUIMICOS
-CREATE DATABASE QUIMICAS;
-USE QUIMICAS;
 
----- Estructura de tabla para la tabla Usuario
+CREATE DATABASE QUIMICASs;
+USE QUIMICASs;
 
---DROP TABLE IF EXISTS Usuario;
---CREATE TABLE Usuario (
---	idUsuario INT PRIMARY KEY IDENTITY, -- El IDENTITY es igual al AUTO_INCREMENT de MySQL
---	nombreUsuario VARCHAR(255) UNIQUE NOT NULL,
---	contraseña VARCHAR(255) NOT NULL,
---	nombre VARCHAR(255) NOT NULL,
---	apellidos VARCHAR(255) NOT NULL,
---	esProfesor BIT NOT NULL -- BIT == BOOLEAN en MySQL
---); 
 
---Creación de la tabla formato para los reactivos
+
+
 CREATE TABLE formato (
   idFormato int PRIMARY KEY,
   nombreFormato varchar(20) NOT NULL);
@@ -25,17 +15,16 @@ CREATE TABLE formato (
 (3, '250 g'),
 (4, '500 g'),
 (5, '5 g'),
-(100, 'No viene reflejado'),
-(6, '1 L'),
-(7, '500 mL'),
-(8, '5 Kg'),
-(9, '2,5 L'),
-(10, '250 mL'),
-(11, '100 mL'),
-(12, '250 g,1 kg'),
-(13, '10 g');
+(6, 'No viene reflejado'),
+(7, '1 L'),
+(8, '500 mL'),
+(9, '5 Kg'),
+(10, '2,5 L'),
+(11, '250 mL'),
+(12, '100 mL'),
+(13, '250 g,1 kg'),
+(14, '10 g');
 
---Creación de la tabla de Localizacion
 
 DROP TABLE IF EXISTS Localizacion;
 CREATE TABLE Localizacion (
@@ -49,7 +38,7 @@ INSERT into Localizacion (nombreAlmacen) values
 ('Laboratorio Instrumental'),
 ('Almacén 1/principal');
 select * from localizacion
--- Creación de la tabla de Ubicacion
+
 
 DROP TABLE IF EXISTS Ubicacion;
 CREATE TABLE Ubicacion (
@@ -75,7 +64,7 @@ INSERT INTO ubicacion (nombre, idLocalizacion) VALUES
 
 
 
---Estructura de la tabla para la tabla ProductoQuimico
+
 
 DROP TABLE IF EXISTS Productos;
 CREATE TABLE Productos (
@@ -281,7 +270,7 @@ ALTER TABLE Productos
 ADD CONSTRAINT CK_tipoProducto       
 CHECK (tipoProducto IN ('REACTIVO', 'PRODUCTOAUXILIAR', 'MATERIAL'));
 
---Creación de la tabla Reactivo
+
 
 DROP TABLE IF EXISTS Reactivo;
 CREATE TABLE Reactivo (
@@ -394,7 +383,7 @@ INSERT INTO reactivo (idReactivo, gradoPureza, fechaCaducidad, idProducto, idFor
 (95, '99 %', 'No viene reflejada', 95, 7),
 (96, '99 %', 'No viene reflejada', 96, 1),
 (97, 'Purísimo', 'No viene reflejada', 97, 6),
-(98, 'No viene reflejado', 'No viene reflejada', 98, 7),
+(98, 'No viene reflejado', 'No viene reflejada', 98, 7);
 (99, '98 %', 'No viene reflejada', 99, 4),
 (100, '98 %', 'No viene reflejada', 100, 4),
 (101, 'Purísimo', 'No viene reflejada', 101, 6),
@@ -453,7 +442,7 @@ INSERT INTO reactivo (idReactivo, gradoPureza, fechaCaducidad, idProducto, idFor
 (154, '99 %', 'No viene reflejada', 154, 1),
 (155, '99 %', 'No viene reflejada', 155, 1),
 (156, '99 %', 'No viene reflejada', 156, 3);
---Estructura de la tabla para la tabla Material
+
 
 DROP TABLE IF EXISTS Material;
 CREATE TABLE Material (
@@ -461,8 +450,7 @@ CREATE TABLE Material (
 	idProducto INT NOT NULL,
 	Subcategoria VARCHAR(50) NOT NULL,
     CONSTRAINT CK_Subcategoria 
-        CHECK (Subcategoria IN ('Plástico', 'Cristal', 'Instrumental Electrónico')),
-	--El ENUM en MySQL sería: nombre_enum ENUM('Plástico', 'Cristal', 'Instrumental Electrónico'),
+        CHECK (Subcategoria IN ('plástico', 'cristal', 'Instrumental Electrónico')),
 	descripcion VARCHAR(255),
 	numeroSerie VARCHAR(100),
 	fechaCompra VARCHAR(50),
@@ -489,7 +477,6 @@ INSERT INTO material ( Subcategoria, Descripcion, FechaCompra, IdProducto, Numer
 
 
 
---Estructura de la tabla para la tabla Productos Auxiliares
 
 DROP TABLE IF EXISTS ProductoAuxiliar;
 CREATE TABLE ProductoAuxiliar (
@@ -510,15 +497,14 @@ INSERT INTO ProductoAuxiliar( formato, IdProducto) VALUES
 ( 'Plástico ', 164);
 
 
---Tabla de Riesgo
 DROP TABLE IF EXISTS Riesgo;
 CREATE TABLE Riesgo (
 	idRiesgo INT PRIMARY KEY IDENTITY,
 	nombre VARCHAR(255) NOT NULL,
-	pictograma VARBINARY(MAX) --Campo para almacenar imágenes en MySQL es un BLOB en vez de VARBINARY
+	pictograma VARBINARY(MAX) 
 );
 
---Tabla de ReactivoRiesgo (Tabla de unión)
+
 DROP TABLE IF EXISTS ReactivoRiesgo;
 CREATE TABLE ReactivoRiesgo (
 	idReactivo INT,
@@ -527,6 +513,3 @@ CREATE TABLE ReactivoRiesgo (
 	FOREIGN KEY (idReactivo) REFERENCES Reactivo(idReactivo) ON DELETE CASCADE,
 	FOREIGN KEY (idRiesgo) REFERENCES Riesgo(idRiesgo) ON DELETE CASCADE
 );
-
-
-

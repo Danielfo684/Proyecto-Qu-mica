@@ -1,5 +1,6 @@
 package Proyecto_Quimica.InterfazGrafica;
 
+import Proyecto_Quimica.BBDD.Conexion;
 import javax.swing.JOptionPane;
 
 public class Inicio extends javax.swing.JFrame {
@@ -131,18 +132,24 @@ public class Inicio extends javax.swing.JFrame {
 
     private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
         Alumno ventanaAlu = new Alumno();  //acceso a la nueva ventana
+        Conexion conexion = new Conexion();
+        conexion.conectarAlumno();
         ventanaAlu.setVisible(true);
+
         this.dispose(); //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
     }//GEN-LAST:event_jButton1ActionPerformed
 
     private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
         if (textoContraseña.getText().equals("admin")
                 && textoUsuario.getText().equals("admin")) {
+            Conexion conexion = new Conexion();
+            conexion.conectarProfesor(textoUsuario.getText(), textoContraseña.getText());
             Profesor ventanaProfe = new Profesor();  //acceso a la nueva ventana
             ventanaProfe.setVisible(true);
             this.dispose(); //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
+        } else {
+            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
         }
-        else JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
 
     }//GEN-LAST:event_jButton2ActionPerformed
 
@@ -186,6 +193,9 @@ public class Inicio extends javax.swing.JFrame {
         });
 
     }
+    
+    
+    
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jButton1;
