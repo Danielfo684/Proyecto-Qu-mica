@@ -16,7 +16,7 @@ public class Conexion {
     public Conexion() {
     }
 
-    public static Connection conectar() {
+    public static Connection conectarRoot() {
         Connection con = null;
         try {
             con = DriverManager.getConnection("jdbc:mysql://localhost/quimica", "root", "");
@@ -51,7 +51,7 @@ public class Conexion {
     }
 
     public static void vaciarBD() throws SQLException {
-        try (Connection conexion = Conexion.conectar()) {
+        try (Connection conexion = Conexion.conectarRoot()) {
             //creamos una sentencia que nos elimine las claves foráneas
             PreparedStatement sentenciaSQL = conexion.prepareStatement("SET FOREIGN_KEY_CHECKS=0");
             sentenciaSQL.execute();
