@@ -29,6 +29,9 @@ public class Producto {
         this.stockMinimo = stockMinimo;
     }
 
+    //CREAR UNA FUNCIÓN QUE 
+    
+    
     public Producto(String nombre) {
         this.nombre = nombre;
     }

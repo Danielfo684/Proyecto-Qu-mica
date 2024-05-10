@@ -31,6 +31,17 @@ public class Reactivo extends Producto {
         this.gradoPureza = gradoPureza;
         this.fechaCaducidad = fechaCaducidad;
     }
+   //CONSTRUCTOR SIN IDREACTIVO YA QUE SE ASIGNA AUTOMATICAMENTE AL METERLO
+    //EN LA BASE DE DATOS. ESTE CONSTRUCTOR NOS SIRVE PARA INSERTAR NUEVOS OBJETOS
+    public Reactivo(
+            String descripcion,
+            String gradoPureza, Date fechaCaducidad, int idProducto, String nombre,
+            int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo) {
+        super(idProducto, nombre, idLocalizacion, ubicacionCodigo, idUbicacion, cantidad, stockMinimo);
+        this.descripcion = descripcion;
+        this.gradoPureza = gradoPureza;
+        this.fechaCaducidad = fechaCaducidad;
+    }
 
     public int getIdReactivo() {
         return idReactivo;
