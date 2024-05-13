@@ -86,7 +86,7 @@ public class Conexion {
         try {
             return conectarRoot(usuarioAlumno, contraseñaAlumno);
         } catch (SQLException ex) {
-            System.out.println("Hubo un problema con la conexión a la base de datos");
+            System.out.println("Hubo un problema con la conexión a la base de datos.");
             Logger.getLogger(Conexion.class.getName()).log(Level.SEVERE, null, ex);
             return null;
         }
