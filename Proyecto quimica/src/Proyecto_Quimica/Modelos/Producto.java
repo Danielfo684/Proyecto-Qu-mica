@@ -6,10 +6,8 @@ package Proyecto_Quimica.Modelos;
 
 import java.util.Objects;
 
-/**
- *
- * @author mdpan
- */
+enum tipoProducto {REACTIVO, MATERIAL, PRODUCTOAUXILIAR};
+
 public class Producto {
    protected int idProducto;
    protected String nombre;
@@ -17,17 +15,57 @@ public class Producto {
    protected int idUbicacion;
    protected int cantidad;
    protected int stockMinimo;
+   protected String nombreUbicacion;
+   protected String nombreLocalizacion;
+   protected  tipoProducto tipo;
 
-    public Producto(int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
+   
+   //CONSTRUCTOR PARA INSERTAR NUEVOS PRODUCTOS
+    public Producto(int idProducto, String nombre, int idLocalizacion, int idUbicacion,
+            int cantidad, int stockMinimo, tipoProducto tipo) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.idLocalizacion = idLocalizacion;
         this.idUbicacion = idUbicacion;
         this.cantidad = cantidad;
         this.stockMinimo = stockMinimo;
+        this.tipo = tipo;
+    }
+    
+    //CONSTRUCTOR PARA CONSULTAS SELECT DE PRODUCTOS
+    public Producto(String nombre, int cantidad, String tipo, String nombreUbicacion, String nombreLocalizacion) {
+        this.nombre = nombre;
+        this.cantidad = cantidad;
+        this.nombreUbicacion = nombreUbicacion;
+        this.nombreLocalizacion = nombreLocalizacion;
+        this.tipo = tipoProducto.valueOf(tipo);
     }
 
-    //CREAR UNA FUNCIÓN QUE 
+    public String getNombreUbicacion() {
+        return nombreUbicacion;
+    }
+
+    public void setNombreUbicacion(String nombreUbicacion) {
+        this.nombreUbicacion = nombreUbicacion;
+    }
+
+    public String getNombreLocalizacion() {
+        return nombreLocalizacion;
+    }
+
+    public void setNombreLocalizacion(String nombreLocalizacion) {
+        this.nombreLocalizacion = nombreLocalizacion;
+    }
+
+    public tipoProducto getTipo() {
+        return tipo;
+    }
+
+    public void setTipo(tipoProducto tipo) {
+        this.tipo = tipo;
+    }
+
+
     
     
     public Producto(String nombre) {

@@ -4,8 +4,11 @@
  */
 package Proyecto_Quimica.InterfazGrafica;
 
+import Proyecto_Quimica.BBDD.SentenciasSQL;
 import Proyecto_Quimica.Codigo_Principal.Controlador.LocalizacionController;
 import Proyecto_Quimica.InterfazGrafica.ListaSalas;
+import Proyecto_Quimica.Modelos.Producto;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 /**
@@ -15,7 +18,7 @@ import javax.swing.JOptionPane;
 public class VistaPrincipal extends javax.swing.JFrame {
 
     private boolean esProfesor;
-    
+
     public VistaPrincipal(boolean esProfesor) {
         setSize(500, 500); //establece el tamaño de la ventana principal
         setDefaultCloseOperation(EXIT_ON_CLOSE);  //Hace que el programa se 
@@ -23,7 +26,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         initComponents();
         setTitle("Gestor de Química"); //Título para la ventana del JFrame
         setLocationRelativeTo(null);  //nos centra la ventana de JFrame en el centro de la pantalla
-        
+
         // Ocultar botones si el usuario no es profesor
         if (!esProfesor) {
             jLabel4.setVisible(false);
@@ -50,16 +53,16 @@ public class VistaPrincipal extends javax.swing.JFrame {
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
         bInsertarProductoAuxiliar = new javax.swing.JButton();
-        iBuscarNombre = new javax.swing.JTextField();
+        busquedaPorNombre = new javax.swing.JTextField();
         iBuscarFormato = new javax.swing.JTextField();
         jLabel1 = new javax.swing.JLabel();
         bVolverInicio = new javax.swing.JButton();
         jScrollPane2 = new javax.swing.JScrollPane();
-        TablaProductos1 = new javax.swing.JTable();
+        tablaPrincipal = new javax.swing.JTable();
         bInsertarReactivo = new javax.swing.JButton();
         bInsertarMaterial = new javax.swing.JButton();
         iBuscarTipoProducto = new javax.swing.JTextField();
-        bBuscar = new javax.swing.JButton();
+        botonBusqueda = new javax.swing.JButton();
         BarraMenu = new javax.swing.JMenuBar();
         mArchivo = new javax.swing.JMenu();
         mExportar = new javax.swing.JMenu();
@@ -104,9 +107,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
         bInsertarProductoAuxiliar.setText("Producto auxiliar");
 
-        iBuscarNombre.addActionListener(new java.awt.event.ActionListener() {
+        busquedaPorNombre.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                iBuscarNombreActionPerformed(evt);
+                busquedaPorNombreActionPerformed(evt);
             }
         });
 
@@ -126,23 +129,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        TablaProductos1.setModel(new javax.swing.table.DefaultTableModel(
+        tablaPrincipal.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
 
             },
             new String [] {
-                "ID", "Nombre", "Ubicacion", "cantidad", "tipo de producto"
+                "Nombre", "Cantidad", "Tipo", "Ubicación", "Localización"
             }
         ) {
             Class[] types = new Class [] {
-                java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.Integer.class, java.lang.String.class
+                java.lang.String.class, java.lang.Integer.class, java.lang.String.class, java.lang.String.class, java.lang.String.class
             };
 
             public Class getColumnClass(int columnIndex) {
                 return types [columnIndex];
             }
         });
-        jScrollPane2.setViewportView(TablaProductos1);
+        jScrollPane2.setViewportView(tablaPrincipal);
 
         bInsertarReactivo.setText("Reactivo");
         bInsertarReactivo.addActionListener(new java.awt.event.ActionListener() {
@@ -164,13 +167,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
             }
         });
 
-        bBuscar.setText("Buscar");
+        botonBusqueda.setText("Buscar");
+        botonBusqueda.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                botonBusquedaActionPerformed(evt);
+            }
+        });
 
         escritorio.setLayer(jLabel4, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel2, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel3, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(bInsertarProductoAuxiliar, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(iBuscarNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(busquedaPorNombre, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(iBuscarFormato, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(jLabel1, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(bVolverInicio, javax.swing.JLayeredPane.DEFAULT_LAYER);
@@ -178,7 +186,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
         escritorio.setLayer(bInsertarReactivo, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(bInsertarMaterial, javax.swing.JLayeredPane.DEFAULT_LAYER);
         escritorio.setLayer(iBuscarTipoProducto, javax.swing.JLayeredPane.DEFAULT_LAYER);
-        escritorio.setLayer(bBuscar, javax.swing.JLayeredPane.DEFAULT_LAYER);
+        escritorio.setLayer(botonBusqueda, javax.swing.JLayeredPane.DEFAULT_LAYER);
 
         javax.swing.GroupLayout escritorioLayout = new javax.swing.GroupLayout(escritorio);
         escritorio.setLayout(escritorioLayout);
@@ -197,8 +205,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
                         .addComponent(iBuscarTipoProducto, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
                         .addComponent(iBuscarFormato, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                        .addComponent(bBuscar, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
-                        .addComponent(iBuscarNombre, javax.swing.GroupLayout.Alignment.LEADING))
+                        .addComponent(botonBusqueda, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 114, Short.MAX_VALUE)
+                        .addComponent(busquedaPorNombre, javax.swing.GroupLayout.Alignment.LEADING))
                     .addGroup(escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                         .addComponent(bVolverInicio, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(bInsertarReactivo, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -212,11 +220,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
             escritorioLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(escritorioLayout.createSequentialGroup()
                 .addGap(25, 25, 25)
-                .addComponent(bBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(botonBusqueda, javax.swing.GroupLayout.PREFERRED_SIZE, 38, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jLabel1)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(iBuscarNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(busquedaPorNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 16, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -352,9 +360,9 @@ public class VistaPrincipal extends javax.swing.JFrame {
         this.dispose();
     }//GEN-LAST:event_bVolverInicioActionPerformed
 
-    private void iBuscarNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iBuscarNombreActionPerformed
+    private void busquedaPorNombreActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_busquedaPorNombreActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_iBuscarNombreActionPerformed
+    }//GEN-LAST:event_busquedaPorNombreActionPerformed
 
     private void iBuscarFormatoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_iBuscarFormatoActionPerformed
         // TODO add your handling code here:
@@ -386,7 +394,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
             CargarDatosController cargarDatosController = new CargarDatosController();
             cargarDatosController.cargarDatosDesdeCSV();
         }
-        */
+         */
     }//GEN-LAST:event_miCargarDatosActionPerformed
 
     private void miSalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSalirActionPerformed
@@ -416,23 +424,31 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_miListaSalasActionPerformed
 
+    private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
+        tablaPrincipal.removeAll();
+    ArrayList<Producto> listado =  SentenciasSQL.busquedaBasica(busquedaPorNombre.getText());
+    for (Producto producto : listado) {
+tablaPrincipal.addRowSelectionInterval(0, listado.size());
+   
+    }
+
+    }//GEN-LAST:event_botonBusquedaActionPerformed
+
     /**
      * @param args the command line arguments
      */
 
-
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JMenuBar BarraMenu;
     private javax.swing.JTable TablaProductos;
-    private javax.swing.JTable TablaProductos1;
-    private javax.swing.JButton bBuscar;
     private javax.swing.JButton bInsertarMaterial;
     private javax.swing.JButton bInsertarProductoAuxiliar;
     private javax.swing.JButton bInsertarReactivo;
     private javax.swing.JButton bVolverInicio;
+    private javax.swing.JButton botonBusqueda;
+    private javax.swing.JTextField busquedaPorNombre;
     private javax.swing.JDesktopPane escritorio;
     private javax.swing.JTextField iBuscarFormato;
-    private javax.swing.JTextField iBuscarNombre;
     private javax.swing.JTextField iBuscarTipoProducto;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
@@ -459,5 +475,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
     private javax.swing.JMenuItem miNuevoSala;
     private javax.swing.JMenuItem miSalir;
     private javax.swing.JMenuItem miSobreMi;
+    private javax.swing.JTable tablaPrincipal;
     // End of variables declaration//GEN-END:variables
 }

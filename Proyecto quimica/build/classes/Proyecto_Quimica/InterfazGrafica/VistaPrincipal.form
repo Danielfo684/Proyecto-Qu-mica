@@ -209,8 +209,8 @@
                           <Component id="iBuscarFormato" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
-                          <Component id="bBuscar" alignment="0" pref="114" max="32767" attributes="0"/>
-                          <Component id="iBuscarNombre" alignment="0" max="32767" attributes="0"/>
+                          <Component id="botonBusqueda" alignment="0" pref="114" max="32767" attributes="0"/>
+                          <Component id="busquedaPorNombre" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                           <Component id="bVolverInicio" alignment="0" max="32767" attributes="0"/>
@@ -229,11 +229,11 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="0" attributes="0">
                   <EmptySpace min="-2" pref="25" max="-2" attributes="0"/>
-                  <Component id="bBuscar" min="-2" pref="38" max="-2" attributes="0"/>
+                  <Component id="botonBusqueda" min="-2" pref="38" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
                   <Component id="jLabel1" min="-2" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
-                  <Component id="iBuscarNombre" min="-2" max="-2" attributes="0"/>
+                  <Component id="busquedaPorNombre" min="-2" max="-2" attributes="0"/>
                   <EmptySpace type="separate" max="-2" attributes="0"/>
                   <Component id="jLabel2" min="-2" pref="16" max="-2" attributes="0"/>
                   <EmptySpace max="-2" attributes="0"/>
@@ -279,9 +279,9 @@
             <Property name="text" type="java.lang.String" value="Producto auxiliar"/>
           </Properties>
         </Component>
-        <Component class="javax.swing.JTextField" name="iBuscarNombre">
+        <Component class="javax.swing.JTextField" name="busquedaPorNombre">
           <Events>
-            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iBuscarNombreActionPerformed"/>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="busquedaPorNombreActionPerformed"/>
           </Events>
         </Component>
         <Component class="javax.swing.JTextField" name="iBuscarFormato">
@@ -312,15 +312,15 @@
 
           <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
           <SubComponents>
-            <Component class="javax.swing.JTable" name="TablaProductos1">
+            <Component class="javax.swing.JTable" name="tablaPrincipal">
               <Properties>
                 <Property name="model" type="javax.swing.table.TableModel" editor="org.netbeans.modules.form.editors2.TableModelEditor">
                   <Table columnCount="5" rowCount="0">
-                    <Column editable="true" title="ID" type="java.lang.Integer"/>
                     <Column editable="true" title="Nombre" type="java.lang.String"/>
-                    <Column editable="true" title="Ubicacion" type="java.lang.String"/>
-                    <Column editable="true" title="cantidad" type="java.lang.Integer"/>
-                    <Column editable="true" title="tipo de producto" type="java.lang.String"/>
+                    <Column editable="true" title="Cantidad" type="java.lang.Integer"/>
+                    <Column editable="true" title="Tipo" type="java.lang.String"/>
+                    <Column editable="true" title="Ubicaci&#xf3;n" type="java.lang.String"/>
+                    <Column editable="true" title="Localizaci&#xf3;n" type="java.lang.String"/>
                   </Table>
                 </Property>
                 <Property name="columnModel" type="javax.swing.table.TableColumnModel" editor="org.netbeans.modules.form.editors2.TableColumnModelEditor">
@@ -380,10 +380,13 @@
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="iBuscarTipoProductoActionPerformed"/>
           </Events>
         </Component>
-        <Component class="javax.swing.JButton" name="bBuscar">
+        <Component class="javax.swing.JButton" name="botonBusqueda">
           <Properties>
             <Property name="text" type="java.lang.String" value="Buscar"/>
           </Properties>
+          <Events>
+            <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="botonBusquedaActionPerformed"/>
+          </Events>
         </Component>
       </SubComponents>
     </Container>
