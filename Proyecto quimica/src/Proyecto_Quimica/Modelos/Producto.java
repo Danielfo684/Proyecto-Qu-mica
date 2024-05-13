@@ -6,7 +6,9 @@ package Proyecto_Quimica.Modelos;
 
 import java.util.Objects;
 
-enum tipoProducto {REACTIVO, MATERIAL, PRODUCTOAUXILIAR};
+enum tipoProducto {
+    REACTIVO, MATERIAL, PRODUCTOAUXILIAR
+};
 
 public class Producto {
    protected int idProducto;
@@ -22,14 +24,13 @@ public class Producto {
    
    //CONSTRUCTOR PARA INSERTAR NUEVOS PRODUCTOS
     public Producto(int idProducto, String nombre, int idLocalizacion, int idUbicacion,
-            int cantidad, int stockMinimo, tipoProducto tipo) {
+            int cantidad, int stockMinimo) {
         this.idProducto = idProducto;
         this.nombre = nombre;
         this.idLocalizacion = idLocalizacion;
         this.idUbicacion = idUbicacion;
         this.cantidad = cantidad;
         this.stockMinimo = stockMinimo;
-        this.tipo = tipo;
     }
     
     //CONSTRUCTOR PARA CONSULTAS SELECT DE PRODUCTOS
@@ -59,6 +60,10 @@ public class Producto {
 
     public tipoProducto getTipo() {
         return tipo;
+    }
+    
+    public String getTipoToString() {
+    return tipo.toString();
     }
 
     public void setTipo(tipoProducto tipo) {

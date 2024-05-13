@@ -10,8 +10,8 @@ public class ProductoAuxiliar extends Producto {
         super(nombre);
     }
     
-    public ProductoAuxiliar(int idProductoAuxiliar, String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo) {
-    super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo);
+    public ProductoAuxiliar(int idProductoAuxiliar, String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo, tipoProducto tipo) {
+    super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo );
         this.idProductoAuxiliar = idProductoAuxiliar;
         this.formato = formato;
     }
@@ -19,7 +19,7 @@ public class ProductoAuxiliar extends Producto {
     //CONSTRUCTOR SIN IDPROAUXLIAR YA QUE SE ASIGNA AUTOMATICAMENTE AL METERLO
     //EN LA BASE DE DATOS. ESTE CONSTRUCTOR NOS SIRVE PARA INSERTAR NUEVOS OBJETOS
     
-    public ProductoAuxiliar( String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo) {
+    public ProductoAuxiliar( String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo, tipoProducto tipo) {
     super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo);
         this.formato = formato;
     }

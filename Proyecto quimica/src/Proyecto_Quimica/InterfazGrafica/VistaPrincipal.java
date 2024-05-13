@@ -10,6 +10,7 @@ import Proyecto_Quimica.InterfazGrafica.ListaSalas;
 import Proyecto_Quimica.Modelos.Producto;
 import java.util.ArrayList;
 import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
 
 /**
  *
@@ -425,12 +426,17 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_miListaSalasActionPerformed
 
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
-        tablaPrincipal.removeAll();
-    ArrayList<Producto> listado =  SentenciasSQL.busquedaBasica(busquedaPorNombre.getText());
-    for (Producto producto : listado) {
-tablaPrincipal.addRowSelectionInterval(0, listado.size());
-   
-    }
+        DefaultTableModel tablaBase = new DefaultTableModel(new Object[][]{},
+                new String[]{"Nombre", "Cantidad", "Tipo", "Ubicación", "Localización"});
+
+        ArrayList<Producto> listado = SentenciasSQL.busquedaBasica(busquedaPorNombre.getText());
+        for (Producto producto : listado) {
+            tablaBase.addRow(new Object[]{
+                producto.getNombre(), producto.getCantidad(),
+                producto.getTipoToString(), producto.getNombreUbicacion(), 
+                producto.getNombreLocalizacion()
+            });
+        }
 
     }//GEN-LAST:event_botonBusquedaActionPerformed
 
