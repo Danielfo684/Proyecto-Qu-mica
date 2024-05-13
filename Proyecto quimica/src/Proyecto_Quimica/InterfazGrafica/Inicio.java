@@ -1,17 +1,21 @@
 package Proyecto_Quimica.InterfazGrafica;
 
 import Proyecto_Quimica.BBDD.Conexion;
+import java.sql.Connection;
 import javax.swing.JOptionPane;
+import java.sql.SQLException;
 
 public class Inicio extends javax.swing.JFrame {
 
+    public static Connection conexionGlobal;
+    
     public Inicio() {
         setSize(500, 500); //establece el tamaño de la ventana principal
         setDefaultCloseOperation(EXIT_ON_CLOSE);  //Hace que el programa se 
         // cierre al cerrar la ventana
         initComponents();
         setTitle("Gestor de Química"); //Título para la ventana del JFrame
-        setLocationRelativeTo(null);  //nos centra la ventana de JFrame en el centro de la pantalla
+        setLocationRelativeTo(null);  // nos centra la ventana de JFrame en el centro de la pantalla
     }
 
     /**
@@ -23,10 +27,10 @@ public class Inicio extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jButton1 = new javax.swing.JButton();
-        jButton2 = new javax.swing.JButton();
-        jLabel1 = new javax.swing.JLabel();
-        jLabel2 = new javax.swing.JLabel();
+        entrarAlumno = new javax.swing.JButton();
+        entrarProfesor = new javax.swing.JButton();
+        tUsuario = new javax.swing.JLabel();
+        tContraseña = new javax.swing.JLabel();
         textoUsuario = new javax.swing.JTextField();
         jLabel3 = new javax.swing.JLabel();
         jLabel4 = new javax.swing.JLabel();
@@ -35,27 +39,27 @@ public class Inicio extends javax.swing.JFrame {
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
-        jButton1.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton1.setText("Entrar");
-        jButton1.addActionListener(new java.awt.event.ActionListener() {
+        entrarAlumno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        entrarAlumno.setText("Entrar");
+        entrarAlumno.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton1ActionPerformed(evt);
+                entrarAlumnoActionPerformed(evt);
             }
         });
 
-        jButton2.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
-        jButton2.setText("Entrar como profesor");
-        jButton2.addActionListener(new java.awt.event.ActionListener() {
+        entrarProfesor.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
+        entrarProfesor.setText("Entrar como profesor");
+        entrarProfesor.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                jButton2ActionPerformed(evt);
+                entrarProfesorActionPerformed(evt);
             }
         });
 
-        jLabel1.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel1.setText("Usuario:");
+        tUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tUsuario.setText("Usuario:");
 
-        jLabel2.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
-        jLabel2.setText("Contraseña:");
+        tContraseña.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
+        tContraseña.setText("Contraseña:");
 
         textoUsuario.setFont(new java.awt.Font("Segoe UI", 0, 14)); // NOI18N
         textoUsuario.addActionListener(new java.awt.event.ActionListener() {
@@ -87,17 +91,17 @@ public class Inicio extends javax.swing.JFrame {
                         .addComponent(jLabel4))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(230, 230, 230)
-                        .addComponent(jButton1)))
+                        .addComponent(entrarAlumno)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(jLabel5)
                     .addGroup(layout.createSequentialGroup()
                         .addGap(6, 6, 6)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(jLabel2)
-                            .addComponent(jButton2)
+                            .addComponent(tContraseña)
+                            .addComponent(entrarProfesor)
                             .addGroup(layout.createSequentialGroup()
-                                .addComponent(jLabel1)
+                                .addComponent(tUsuario)
                                 .addGap(52, 52, 52)
                                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -115,43 +119,60 @@ public class Inicio extends javax.swing.JFrame {
                     .addComponent(jLabel5))
                 .addGap(18, 18, 18)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel1)
+                    .addComponent(tUsuario)
                     .addComponent(textoUsuario, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabel2)
-                    .addComponent(jButton1)
+                    .addComponent(tContraseña)
+                    .addComponent(entrarAlumno)
                     .addComponent(textoContraseña, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(jButton2)
+                .addComponent(entrarProfesor)
                 .addContainerGap(73, Short.MAX_VALUE))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton1ActionPerformed
-        Alumno ventanaAlu = new Alumno();  //acceso a la nueva ventana
-        Conexion conexion = new Conexion();
-        conexion.conectarAlumno();
-        ventanaAlu.setVisible(true);
+    private void entrarAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarAlumnoActionPerformed
+        boolean esProfesor = false;
+        
+        // Si son correctos, conectamos la base de datos
+            boolean conexionCorrecta = conectarBD(esProfesor);
 
-        this.dispose(); //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
-    }//GEN-LAST:event_jButton1ActionPerformed
+            if (conexionCorrecta){
+                // SI la conexion se hace con exito, cerramos la ventana de inicio de sesión
+                VistaPrincipal vistaPrincipal = new VistaPrincipal(esProfesor);
+                vistaPrincipal.setVisible(true);
+                //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
+                this.dispose();  
+            }else{
+               JOptionPane.showMessageDialog(Inicio.this, "Error al conectar la base de datos."); 
+            }
+    }//GEN-LAST:event_entrarAlumnoActionPerformed
 
-    private void jButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jButton2ActionPerformed
-        if (textoContraseña.getText().equals("admin")
-                && textoUsuario.getText().equals("admin")) {
-            Conexion conexion = new Conexion();
-            conexion.conectarProfesor(textoUsuario.getText(), textoContraseña.getText());
-            Profesor ventanaProfe = new Profesor();  //acceso a la nueva ventana
-            ventanaProfe.setVisible(true);
-            this.dispose(); //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
-        } else {
-            JOptionPane.showMessageDialog(this, "Usuario o contraseña incorrectos");
-        }
+    private void entrarProfesorActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_entrarProfesorActionPerformed
+        boolean esProfesor = true;
+        // Verificar usuario y contraseña 
+        boolean credencialesCorrectas = validarCredenciales();
 
-    }//GEN-LAST:event_jButton2ActionPerformed
+        if(credencialesCorrectas){
+            // Si son correctos, conectamos la base de datos
+            boolean conexionCorrecta = conectarBD(esProfesor);
+
+            if (conexionCorrecta){
+                // SI la conexion se hace con exito, cerramos la ventana de inicio de sesión
+                VistaPrincipal vistaPrincipal = new VistaPrincipal(esProfesor);
+                vistaPrincipal.setVisible(true);
+                //este método hace que las ventanas no se acumulen y así solo tenemos la ventana que queremos
+                this.dispose();  
+            }else{
+               JOptionPane.showMessageDialog(Inicio.this, "Error al conectar la base de datos."); 
+            }
+        }else{
+            JOptionPane.showMessageDialog(Inicio.this, "Usuario o contraseña incorrecta.");
+        } 
+    }//GEN-LAST:event_entrarProfesorActionPerformed
 
     private void textoUsuarioActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_textoUsuarioActionPerformed
         // TODO add your handling code here:
@@ -194,17 +215,55 @@ public class Inicio extends javax.swing.JFrame {
 
     }
     
+    public static Connection getConexionGlobal(){
+        return conexionGlobal;
+    }
     
-    
+    private boolean validarCredenciales(){
+        // Obtener usuarios y contraseñas escritos por el usuario
+        String usuarioInput = textoUsuario.getText();
+        // la contraseña la convertimos en String para poder compararla con la contraseña guardada
+        String contraseñaInput = new String(textoContraseña.getPassword());
+
+        // Obtencion del usuario y contraseñas que deberia tener la base de datos (guardados en quimicos.config)
+        Conexion conexionDB = new Conexion();
+        // Llamamos al metodo getConfiguracion() de la clase ConexionBD.java donde
+        // se lee el fichero de configuracion y guarda las propiedades del fichero en variables.
+        conexionDB.getConfiguracion();
+        String usuario = conexionDB.getUsuario();
+        String contraseña = conexionDB.getContraseña();
+
+        // Comprobar si las credenciales coinciden
+        return usuarioInput.equals(usuario) && contraseñaInput.equals(contraseña);
+
+    }
+
+    private boolean conectarBD(boolean esProfesor) {
+        Conexion conexionDB = new Conexion();
+        conexionDB.getConfiguracion();    
+
+        try {
+            if (esProfesor) {
+                conexionGlobal = conexionDB.conectarProfesor();
+            } else {
+                conexionGlobal = conexionDB.conectarAlumno();
+            }
+            return true;          
+        } catch(Exception e){
+            System.err.println("Error al conectar la base de datos " + e.getMessage());
+            return false;
+        }
+    }
+ 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jButton1;
-    private javax.swing.JButton jButton2;
-    private javax.swing.JLabel jLabel1;
-    private javax.swing.JLabel jLabel2;
+    private javax.swing.JButton entrarAlumno;
+    private javax.swing.JButton entrarProfesor;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel tContraseña;
+    private javax.swing.JLabel tUsuario;
     private javax.swing.JPasswordField textoContraseña;
     private javax.swing.JTextField textoUsuario;
     // End of variables declaration//GEN-END:variables
