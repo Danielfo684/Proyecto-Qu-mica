@@ -10,19 +10,19 @@ enum tipoProducto {
     REACTIVO, MATERIAL, PRODUCTOAUXILIAR
 };
 
-public class Producto {
-   protected int idProducto;
-   protected String nombre;
-   protected int idLocalizacion;
-   protected int idUbicacion;
-   protected int cantidad;
-   protected int stockMinimo;
-   protected String nombreUbicacion;
-   protected String nombreLocalizacion;
-   protected  tipoProducto tipo;
+public class Producto implements Comparable {
 
-   
-   //CONSTRUCTOR PARA INSERTAR NUEVOS PRODUCTOS
+    protected int idProducto;
+    protected String nombre;
+    protected int idLocalizacion;
+    protected int idUbicacion;
+    protected int cantidad;
+    protected int stockMinimo;
+    protected String nombreUbicacion;
+    protected String nombreLocalizacion;
+    protected tipoProducto tipo;
+
+    //CONSTRUCTOR PARA INSERTAR NUEVOS PRODUCTOS
     public Producto(int idProducto, String nombre, int idLocalizacion, int idUbicacion,
             int cantidad, int stockMinimo) {
         this.idProducto = idProducto;
@@ -32,7 +32,7 @@ public class Producto {
         this.cantidad = cantidad;
         this.stockMinimo = stockMinimo;
     }
-    
+
     //CONSTRUCTOR PARA CONSULTAS SELECT DE PRODUCTOS
     public Producto(String nombre, int cantidad, String tipo, String nombreUbicacion, String nombreLocalizacion) {
         this.nombre = nombre;
@@ -61,18 +61,15 @@ public class Producto {
     public tipoProducto getTipo() {
         return tipo;
     }
-    
+
     public String getTipoToString() {
-    return tipo.toString();
+        return tipo.toString();
     }
 
     public void setTipo(tipoProducto tipo) {
         this.tipo = tipo;
     }
 
-
-    
-    
     public Producto(String nombre) {
         this.nombre = nombre;
     }
@@ -145,6 +142,11 @@ public class Producto {
         final Producto other = (Producto) obj;
         return Objects.equals(this.nombre, other.nombre);
     }
-   
-   
+
+    @Override
+    public int compareTo(Object o) {
+        Producto p1 = (Producto) o;
+        return this.nombre.compareToIgnoreCase(p1.nombre);
+    }
+
 }

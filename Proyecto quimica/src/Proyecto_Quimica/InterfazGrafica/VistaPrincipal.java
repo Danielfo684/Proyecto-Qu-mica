@@ -9,6 +9,8 @@ import Proyecto_Quimica.Codigo_Principal.Controlador.LocalizacionController;
 import Proyecto_Quimica.InterfazGrafica.ListaSalas;
 import Proyecto_Quimica.Modelos.Producto;
 import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.Collections;
 import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
@@ -430,6 +432,7 @@ public class VistaPrincipal extends javax.swing.JFrame {
                 new String[]{"Nombre", "Cantidad", "Tipo", "Ubicación", "Localización"});
 
         ArrayList<Producto> listado = Conexion.busquedaBasica(busquedaPorNombre.getText());
+        Collections.sort(listado);
         for (Producto producto : listado) {
             tablaBase.addRow(new Object[]{
                 producto.getNombre(), producto.getCantidad(),
