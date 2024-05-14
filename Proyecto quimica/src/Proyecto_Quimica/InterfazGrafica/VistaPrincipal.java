@@ -4,7 +4,7 @@
  */
 package Proyecto_Quimica.InterfazGrafica;
 
-import Proyecto_Quimica.BBDD.SentenciasSQL;
+import Proyecto_Quimica.BBDD.Conexion;
 import Proyecto_Quimica.Codigo_Principal.Controlador.LocalizacionController;
 import Proyecto_Quimica.InterfazGrafica.ListaSalas;
 import Proyecto_Quimica.Modelos.Producto;
@@ -429,13 +429,14 @@ public class VistaPrincipal extends javax.swing.JFrame {
         DefaultTableModel tablaBase = new DefaultTableModel(new Object[][]{},
                 new String[]{"Nombre", "Cantidad", "Tipo", "Ubicación", "Localización"});
 
-        ArrayList<Producto> listado = SentenciasSQL.busquedaBasica(busquedaPorNombre.getText());
+        ArrayList<Producto> listado = Conexion.busquedaBasica(busquedaPorNombre.getText());
         for (Producto producto : listado) {
             tablaBase.addRow(new Object[]{
                 producto.getNombre(), producto.getCantidad(),
                 producto.getTipoToString(), producto.getNombreUbicacion(), 
                 producto.getNombreLocalizacion()
             });
+                    tablaPrincipal.setModel(tablaBase);
         }
 
     }//GEN-LAST:event_botonBusquedaActionPerformed

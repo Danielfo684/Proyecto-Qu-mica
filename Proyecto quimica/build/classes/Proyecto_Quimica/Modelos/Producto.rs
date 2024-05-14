@@ -1,0 +1,2 @@
+Proyecto_Quimica.Modelos.Producto
+Proyecto_Quimica.Modelos.tipoProducto
