@@ -38,6 +38,8 @@ public class Inicio extends javax.swing.JFrame {
         textoContraseña = new javax.swing.JPasswordField();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        setBackground(new java.awt.Color(0, 204, 204));
+        setCursor(new java.awt.Cursor(java.awt.Cursor.DEFAULT_CURSOR));
 
         entrarAlumno.setFont(new java.awt.Font("Segoe UI", 0, 18)); // NOI18N
         entrarAlumno.setText("Entrar");

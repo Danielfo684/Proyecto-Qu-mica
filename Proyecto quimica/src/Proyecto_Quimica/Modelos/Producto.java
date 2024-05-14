@@ -4,6 +4,7 @@
  */
 package Proyecto_Quimica.Modelos;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 enum TipoProducto {

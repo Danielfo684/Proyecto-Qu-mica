@@ -461,7 +461,6 @@ public class VistaPrincipal extends javax.swing.JFrame {
             });
                     tablaPrincipal.setModel(tablaBase);
         }
-
     }//GEN-LAST:event_botonBusquedaActionPerformed
 
     private void miListaQuimicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaQuimicosActionPerformed
