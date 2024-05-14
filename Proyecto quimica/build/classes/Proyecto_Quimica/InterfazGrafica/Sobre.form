@@ -1,0 +1,61 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+
+<Form version="1.3" maxVersion="1.9" type="org.netbeans.modules.form.forminfo.JInternalFrameFormInfo">
+  <Properties>
+    <Property name="closable" type="boolean" value="true"/>
+    <Property name="iconifiable" type="boolean" value="true"/>
+    <Property name="maximizable" type="boolean" value="true"/>
+    <Property name="resizable" type="boolean" value="true"/>
+  </Properties>
+  <SyntheticProperties>
+    <SyntheticProperty name="formSizePolicy" type="int" value="1"/>
+  </SyntheticProperties>
+  <AuxValues>
+    <AuxValue name="FormSettings_autoResourcing" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_autoSetComponentName" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_generateFQN" type="java.lang.Boolean" value="true"/>
+    <AuxValue name="FormSettings_generateMnemonicsCode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_i18nAutoMode" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_layoutCodeTarget" type="java.lang.Integer" value="1"/>
+    <AuxValue name="FormSettings_listenerGenerationStyle" type="java.lang.Integer" value="0"/>
+    <AuxValue name="FormSettings_variablesLocal" type="java.lang.Boolean" value="false"/>
+    <AuxValue name="FormSettings_variablesModifier" type="java.lang.Integer" value="2"/>
+  </AuxValues>
+
+  <Layout>
+    <DimensionLayout dim="0">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="606" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="jScrollPane1" alignment="0" pref="606" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+    <DimensionLayout dim="1">
+      <Group type="103" groupAlignment="0" attributes="0">
+          <EmptySpace min="0" pref="323" max="32767" attributes="0"/>
+          <Group type="103" rootIndex="1" groupAlignment="0" attributes="0">
+              <Component id="jScrollPane1" alignment="0" pref="323" max="32767" attributes="0"/>
+          </Group>
+      </Group>
+    </DimensionLayout>
+  </Layout>
+  <SubComponents>
+    <Container class="javax.swing.JScrollPane" name="jScrollPane1">
+      <AuxValues>
+        <AuxValue name="autoScrollPane" type="java.lang.Boolean" value="true"/>
+      </AuxValues>
+
+      <Layout class="org.netbeans.modules.form.compat2.layouts.support.JScrollPaneSupportLayout"/>
+      <SubComponents>
+        <Component class="javax.swing.JTextArea" name="jTextArea1">
+          <Properties>
+            <Property name="columns" type="int" value="20"/>
+            <Property name="rows" type="int" value="5"/>
+            <Property name="text" type="java.lang.String" value="Nuestro proyecto de programaci&#xf3;n y base de datos, desarrollado por dos alumnos del primer a&#xf1;o del &#xa;ciclo de Desarrollo de Aplicaciones Web (DAW) en el I.E.S. Zaid&#xed;n Vergeles, se presenta como una &#xa;soluci&#xf3;n innovadora para el manejo de reactivos, materiales qu&#xed;micos y productos auxiliares en &#xa;laboratorios institucionales. Daniel Fontalva y Tom&#xe1;s Robertson, con su pasi&#xf3;n por la programaci&#xf3;n y el &#xa;dise&#xf1;o de sistemas eficientes, han creado una aplicaci&#xf3;n inform&#xe1;tica que revoluciona la forma en que se &#xa;gestiona el inventario en entornos de investigaci&#xf3;n cient&#xed;fica.  &#xa;&#xa;Esta iniciativa, nacida en el contexto del aprendizaje en el &#xe1;mbito de la programaci&#xf3;n, destaca por su &#xa;enfoque pr&#xe1;ctico y orientado a las necesidades reales de los usuarios. La aplicaci&#xf3;n desarrollada por &#xa;Fontalva y Robertson ofrece una interfaz amigable y funcionalidades personalizables que permiten a &#xa;los usuarios, incluso aquellos menos familiarizados con la tecnolog&#xed;a, gestionar de manera eficiente los &#xa;recursos del laboratorio, mejorando as&#xed; su productividad y seguridad en el manejo de sustancias &#xa;qu&#xed;micas.  &#xa;&#xa;El compromiso de Fontalva y Robertson con la excelencia en el desarrollo de software se refleja en cada &#xa;aspecto de esta soluci&#xf3;n, desde la robustez de la base de datos hasta la usabilidad del interfaz de &#xa;usuario. Su proyecto no solo simplifica la gesti&#xf3;n de inventarios en entornos cient&#xed;ficos complejos, sino &#xa;que tambi&#xe9;n demuestra el potencial transformador de la educaci&#xf3;n t&#xe9;cnica y la aplicaci&#xf3;n pr&#xe1;ctica de &#xa;los conocimientos adquiridos en el aula."/>
+          </Properties>
+        </Component>
+      </SubComponents>
+    </Container>
+  </SubComponents>
+</Form>

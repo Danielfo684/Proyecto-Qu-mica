@@ -14,18 +14,26 @@ public class Material extends Almacen {
     private Date fechaCompra;
     
 
-    public Material(int idMaterial, Subcategorias subcategoria, String descripcion, String numeroSerie, Date fechaCompra, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
-        super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo, descripcion);
+//    public Material(int idMaterial, Subcategorias subcategoria, String descripcion, String numeroSerie, Date fechaCompra, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
+//        super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo, descripcion);
+//        this.idMaterial = idMaterial;
+//        this.subcategoria = subcategoria;
+//        this.numeroSerie = numeroSerie;
+//        this.fechaCompra = fechaCompra;
+//    }
+     public Material(int idMaterial, Subcategorias subcategoria, String numeroSerie, Date fechaCompra, String descripcion, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
+        super(descripcion, idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo);
         this.idMaterial = idMaterial;
         this.subcategoria = subcategoria;
         this.numeroSerie = numeroSerie;
         this.fechaCompra = fechaCompra;
     }
-    
+
     //CONSTRUCTOR SIN IDPROAUXLIAR YA QUE SE ASIGNA AUTOMATICAMENTE AL METERLO
     //EN LA BASE DE DATOS. ESTE CONSTRUCTOR NOS SIRVE PARA INSERTAR NUEVOS OBJETOS
-     public Material(Subcategorias subcategoria, String descripcion, String numeroSerie, Date fechaCompra, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
-        super(nombre, descripcion);
+    //Hacer un objeto de tipo material sin dar un id, para insertar
+    public Material(Subcategorias subcategoria, String descripcion, String numeroSerie, Date fechaCompra, int idProducto, String nombre, String tipoProducto, int idUbicacion, int cantidad, int stockMinimo) {
+        super(idProducto, nombre, descripcion);
         this.subcategoria = subcategoria;
         this.numeroSerie = numeroSerie;
         this.fechaCompra = fechaCompra;

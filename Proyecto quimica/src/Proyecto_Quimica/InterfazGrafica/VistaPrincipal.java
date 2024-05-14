@@ -6,6 +6,8 @@ package Proyecto_Quimica.InterfazGrafica;
 
 import Proyecto_Quimica.BBDD.Conexion;
 import Proyecto_Quimica.Codigo_Principal.Controlador.LocalizacionController;
+import Proyecto_Quimica.Codigo_Principal.Controlador.ProductoController;
+import Proyecto_Quimica.Codigo_Principal.Controlador.UbicacionController;
 import Proyecto_Quimica.InterfazGrafica.ListaSalas;
 import Proyecto_Quimica.Modelos.Producto;
 import java.util.ArrayList;
@@ -325,6 +327,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         mQuimicos.setText("Productos Químicos");
 
         miListaQuimicos.setText("Lista");
+        miListaQuimicos.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miListaQuimicosActionPerformed(evt);
+            }
+        });
         mQuimicos.add(miListaQuimicos);
 
         miNuevoQuimico.setText("Nuevo");
@@ -335,6 +342,11 @@ public class VistaPrincipal extends javax.swing.JFrame {
         mAyuda.setText("Ayuda");
 
         miSobreMi.setText("Sobre...");
+        miSobreMi.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                miSobreMiActionPerformed(evt);
+            }
+        });
         mAyuda.add(miSobreMi);
 
         BarraMenu.add(mAyuda);
@@ -412,12 +424,18 @@ public class VistaPrincipal extends javax.swing.JFrame {
     }//GEN-LAST:event_miSalirActionPerformed
 
     private void miListaCategoriasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaCategoriasActionPerformed
-
+        //Creamos una instancia de UbicacionController
+        UbicacionController ubicacionController = new UbicacionController();
+        ListaUbicaciones listaUbicaciones = new ListaUbicaciones(ubicacionController);
+        
+        //Añadimos la ventana al escritorio (JDesktopPane)
+        escritorio.add(listaUbicaciones);
+        listaUbicaciones.show();
     }//GEN-LAST:event_miListaCategoriasActionPerformed
 
     private void miListaSalasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaSalasActionPerformed
 
-        // Creamos una instancia de LocalizacionController
+        // Creamos una instancia de LocalizacionController y ListaSalas
         LocalizacionController localizacionController = new LocalizacionController();
         ListaSalas listaSalas = new ListaSalas(localizacionController);
 
@@ -427,6 +445,8 @@ public class VistaPrincipal extends javax.swing.JFrame {
 
     }//GEN-LAST:event_miListaSalasActionPerformed
 
+    
+    
     private void botonBusquedaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_botonBusquedaActionPerformed
         DefaultTableModel tablaBase = new DefaultTableModel(new Object[][]{},
                 new String[]{"Nombre", "Cantidad", "Tipo", "Ubicación", "Localización"});
@@ -443,6 +463,23 @@ public class VistaPrincipal extends javax.swing.JFrame {
         }
 
     }//GEN-LAST:event_botonBusquedaActionPerformed
+
+    private void miListaQuimicosActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miListaQuimicosActionPerformed
+        //Creamos una instancia de ProductoController, UbicacionController y ListaProducto
+        ProductoController productoController = new ProductoController();
+        UbicacionController ubicacionController = new UbicacionController();
+        ListaProducto listaProductos = new ListaProducto(productoController, ubicacionController);
+        
+        //Añadimos la ventana al escritorio
+        escritorio.add(listaProductos);
+        listaProductos.show();
+    }//GEN-LAST:event_miListaQuimicosActionPerformed
+
+    private void miSobreMiActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_miSobreMiActionPerformed
+        Sobre verVentana = new Sobre();
+        escritorio.add(verVentana); // añadir la ventana al escritorio (JDesktop Pane)
+        verVentana.show(); // mostrar ventana
+    }//GEN-LAST:event_miSobreMiActionPerformed
 
     /**
      * @param args the command line arguments

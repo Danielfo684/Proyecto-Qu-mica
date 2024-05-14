@@ -130,6 +130,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Lista"/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miListaQuimicosActionPerformed"/>
+              </Events>
             </MenuItem>
             <MenuItem class="javax.swing.JMenuItem" name="miNuevoQuimico">
               <Properties>
@@ -147,6 +150,9 @@
               <Properties>
                 <Property name="text" type="java.lang.String" value="Sobre..."/>
               </Properties>
+              <Events>
+                <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="miSobreMiActionPerformed"/>
+              </Events>
             </MenuItem>
           </SubComponents>
         </Menu>

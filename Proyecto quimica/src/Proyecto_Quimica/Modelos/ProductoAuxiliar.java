@@ -6,23 +6,31 @@ public class ProductoAuxiliar extends Producto {
     private String formato;
     
     
-    public ProductoAuxiliar(String nombre) {
-        super(nombre);
+    public ProductoAuxiliar(int idProducto,String nombre) {
+        super(idProducto, nombre);
     }
     
-    public ProductoAuxiliar(int idProductoAuxiliar, String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo, tipoProducto tipo) {
-    super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo );
+//    public ProductoAuxiliar(int idProductoAuxiliar, String formato, int idProducto, String nombre, String tipoProducto, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo) {
+//    super(idProducto, nombre, tipoProducto, idUbicacion, cantidad, stockMinimo );
+//        this.idProductoAuxiliar = idProductoAuxiliar;
+//        this.formato = formato;
+//    }
+
+    public ProductoAuxiliar(int idProductoAuxiliar, String formato, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
+        super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo);
         this.idProductoAuxiliar = idProductoAuxiliar;
         this.formato = formato;
     }
     
+    
     //CONSTRUCTOR SIN IDPROAUXLIAR YA QUE SE ASIGNA AUTOMATICAMENTE AL METERLO
     //EN LA BASE DE DATOS. ESTE CONSTRUCTOR NOS SIRVE PARA INSERTAR NUEVOS OBJETOS
     
-    public ProductoAuxiliar( String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo, tipoProducto tipo) {
+    public ProductoAuxiliar( String formato, int idProducto, String nombre, int idLocalizacion, String ubicacionCodigo, int idUbicacion, int cantidad, int stockMinimo) {
     super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo);
         this.formato = formato;
     }
+    
         
         
     public int getIdProductoAuxiliar() {

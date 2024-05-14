@@ -11,23 +11,32 @@ import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public  class Conexion {
+public  class Conexion implements SentenciasSQL{
 
     // Connection conexion;
     // Statement consultas;
     public static final String FILE_CONF = "ficheros/quimicos.config";
     private static Connection conexion;
-    private static Properties properties;
+    public static Conexion instance;
+    private Properties properties;
     private static String driver;
     private static String url;
-    private static String usuario;
-    private static String contraseña;
+    private String usuario;
+    private String contraseña;
     private static String usuarioAlumno;
     private static String contraseñaAlumno;
 
     private  static PreparedStatement sentenciaSql = null;
     private  static ResultSet resultadoConsulta = null;
 
+    public static Conexion obtenerConexion() {
+        if(instance == null) {
+            instance = new Conexion();
+            return instance;
+        }
+        return instance;
+    }
+    
     public String getUsuario() {
         return usuario;
     }
@@ -44,7 +53,7 @@ public  class Conexion {
         return contraseñaAlumno;
     }
 
-    public Connection getConexion() {
+    public static Connection getConexion() {
         return conexion;
     }
 
@@ -122,7 +131,7 @@ public  class Conexion {
         }
     }
 
-    public static Connection conectarProfesor() {
+    public Connection conectarProfesor() {
         try {
             return conectarRoot(usuario, contraseña);
         } catch (SQLException ex) {

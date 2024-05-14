@@ -27,10 +27,7 @@ public class LocalizacionController {
 
     public List<Localizacion> getSalas() {
         // Obtener localizaciones
-        Conexion conexionBD = new Conexion();
-        conexionBD.getConexion();
-        
-        LocalizacionService localizacionModel = new LocalizacionService(conexionBD); 
+        LocalizacionService localizacionModel = new LocalizacionService(); 
         this.setLocalizacionModel(localizacionModel);
         List<Localizacion> listaSalas = localizacionModel.obtenerDatos();
         
@@ -40,10 +37,7 @@ public class LocalizacionController {
     
     public void actualizarUsuario(int idLocalizacion, String nuevoNombre) {
         // Obtener localizaciones
-        Conexion conexionBD = new Conexion();
-        conexionBD.getConexion();
-        
-        LocalizacionService localizacionModel = new LocalizacionService(conexionBD); 
+        LocalizacionService localizacionModel = new LocalizacionService(); 
         
         Localizacion sala = localizacionModel.obtenerDato(idLocalizacion);
 

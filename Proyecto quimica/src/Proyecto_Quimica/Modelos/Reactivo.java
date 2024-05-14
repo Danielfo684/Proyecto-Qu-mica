@@ -5,6 +5,7 @@
 package Proyecto_Quimica.Modelos;
 
 import java.sql.Date;
+import Proyecto_Quimica.Modelos.TipoProducto;
 
 /**
  *
@@ -16,12 +17,7 @@ public class Reactivo extends Almacen {
     private String gradoPureza;
     private Date fechaCaducidad;
 
-    public Reactivo(int idReactivo, String descripcion, String gradoPureza, Date fechaCaducidad, int idProducto, String nombre, int idLocalizacion, int idUbicacion, int cantidad, int stockMinimo) {
-        super(idProducto, nombre, idLocalizacion, idUbicacion, cantidad, stockMinimo, descripcion);
-        this.idReactivo = idReactivo;
-        this.gradoPureza = gradoPureza;
-        this.fechaCaducidad = fechaCaducidad;
-    }
+    
     
     //CONSTRUCTOR SIN IDREACTIVO YA QUE SE ASIGNA AUTOMATICAMENTE AL METERLO
     //EN LA BASE DE DATOS. ESTE CONSTRUCTOR NOS SIRVE PARA INSERTAR NUEVOS OBJETOS
