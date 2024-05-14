@@ -17,16 +17,14 @@ public class LocalizacionService implements Editable<Localizacion>{
     
     private Conexion conexionBD;
 
-    public LocalizacionService(Conexion conexionBD) {
-        this.conexionBD = conexionBD;
+    public LocalizacionService() {
     }
     
     @Override
     public Localizacion obtenerDato(int idLocalizacion){
         String sql = "SELECT * FROM Localizacion WHERE idLocalizacion = ?";
 
-        try (Connection conexion = this.conexionBD.getConexion();
-             PreparedStatement statement = conexion.prepareStatement(sql)) {
+        try (PreparedStatement statement = Conexion.getConexion().prepareStatement(sql)) {
             statement.setInt(1, idLocalizacion);
             ResultSet rs = statement.executeQuery();
             while (rs.next()) {
@@ -49,8 +47,7 @@ public class LocalizacionService implements Editable<Localizacion>{
         String sql = "SELECT * FROM Localizacion";
         List<Localizacion> listaSalas = new ArrayList<>();
     
-        try (Connection conexion = this.conexionBD.getConexion();
-            PreparedStatement statement = conexion.prepareStatement(sql);
+        try (PreparedStatement statement = Conexion.getConexion().prepareStatement(sql);
             ResultSet rs = statement.executeQuery()) {
             while (rs.next()) {
                 Localizacion sala = new Localizacion(rs.getInt("idLocalizacion"), rs.getString("nombreAlmacen"));            
@@ -72,11 +69,10 @@ public class LocalizacionService implements Editable<Localizacion>{
     public void editar(Localizacion elemento) {
         String sql = "UPDATE Localizacion SET nombreAlmacen=? WHERE idLocalizacion=?";
         
-        try (Connection conexion = this.conexionBD.getConexion();
-            PreparedStatement statment = conexion.prepareStatement(sql)) {
-            statment.setString(1, elemento.getNombreAlmacen());
-            statment.setInt(2, elemento.getIdLocalizacion());
-            statment.executeUpdate();
+        try (PreparedStatement statement = Conexion.getConexion().prepareStatement(sql)) {
+            statement.setString(1, elemento.getNombreAlmacen());
+            statement.setInt(2, elemento.getIdLocalizacion());
+            statement.executeUpdate();
         } catch (SQLException e) {
             System.err.println("Error al actualizar la localizacion!" + e.getMessage());
         }
@@ -86,8 +82,7 @@ public class LocalizacionService implements Editable<Localizacion>{
     public void eliminar(int idElemento) {
         String sql = "DELETE FROM Localizacion WHERE idLocalizacion=?";
         
-        try (Connection conexion = conexionBD.getConexion();
-             PreparedStatement statement = conexion.prepareStatement(sql)) {
+        try (PreparedStatement statement = Conexion.getConexion().prepareStatement(sql)) {
             statement.setInt(1, idElemento);
             statement.executeUpdate();
         } catch (SQLException e) {

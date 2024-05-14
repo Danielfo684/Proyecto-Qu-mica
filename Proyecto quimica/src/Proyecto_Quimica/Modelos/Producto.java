@@ -6,7 +6,7 @@ package Proyecto_Quimica.Modelos;
 
 import java.util.Objects;
 
-enum tipoProducto {
+enum TipoProducto {
     REACTIVO, MATERIAL, PRODUCTOAUXILIAR
 };
 
@@ -20,7 +20,7 @@ public class Producto implements Comparable {
     protected int stockMinimo;
     protected String nombreUbicacion;
     protected String nombreLocalizacion;
-    protected tipoProducto tipo;
+    protected TipoProducto tipo;
 
     //CONSTRUCTOR PARA INSERTAR NUEVOS PRODUCTOS
     public Producto(int idProducto, String nombre, int idLocalizacion, int idUbicacion,
@@ -39,8 +39,27 @@ public class Producto implements Comparable {
         this.cantidad = cantidad;
         this.nombreUbicacion = nombreUbicacion;
         this.nombreLocalizacion = nombreLocalizacion;
-        this.tipo = tipoProducto.valueOf(tipo);
+        this.tipo = TipoProducto.valueOf(tipo);
     }
+    
+    //CONSTRUCTOR PARA EL PRODUCTOSERVICE OBTENERDATO()
+    public Producto(int idProducto, String nombre) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+    }
+    
+    //CONSTRUCTOR PARA EL PRODUCTOSERVICE OBTENERDATOS()
+
+    public Producto(int idProducto, String nombre, String tipo, int idUbicacion, int cantidad, int stockMinimo, String nombreUbicacion) {
+        this.idProducto = idProducto;
+        this.nombre = nombre;
+        this.idUbicacion = idUbicacion;
+        this.cantidad = cantidad;
+        this.stockMinimo = stockMinimo;
+        this.nombreUbicacion = nombreUbicacion;
+        this.tipo = TipoProducto.valueOf(tipo);
+    }
+    
 
     public String getNombreUbicacion() {
         return nombreUbicacion;
@@ -58,7 +77,7 @@ public class Producto implements Comparable {
         this.nombreLocalizacion = nombreLocalizacion;
     }
 
-    public tipoProducto getTipo() {
+    public TipoProducto getTipo() {
         return tipo;
     }
 
@@ -66,7 +85,7 @@ public class Producto implements Comparable {
         return tipo.toString();
     }
 
-    public void setTipo(tipoProducto tipo) {
+    public void setTipo(TipoProducto tipo) {
         this.tipo = tipo;
     }
 

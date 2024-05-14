@@ -1,0 +1,2 @@
+Proyecto_Quimica.Modelos.Subcategorias
+Proyecto_Quimica.Modelos.Material
