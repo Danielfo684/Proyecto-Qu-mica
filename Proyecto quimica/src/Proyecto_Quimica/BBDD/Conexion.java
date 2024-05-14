@@ -11,7 +11,7 @@ import java.util.logging.Logger;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public  class Conexion {
+public  class Conexion implements SentenciasSQL{
 
     // Connection conexion;
     // Statement consultas;
