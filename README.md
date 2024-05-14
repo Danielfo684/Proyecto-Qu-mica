@@ -1,1 +1,0 @@
-# Proyecto-Qu-mica
