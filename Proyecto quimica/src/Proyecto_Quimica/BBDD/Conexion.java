@@ -63,7 +63,7 @@ public  class Conexion{
 
     public static ArrayList<Producto> busquedaBasica(String seleccion) {
         try {
-            conexion = conectarAlumno();
+           conectarAlumno();
             String consulta = "Select p.nombre, p.cantidad, p.tipoProducto, u.nombre, "
                     + "l.nombreAlmacen "
                     + "FROM productos p INNER JOIN ubicacion u ON u.idUbicacion = p.idUbicacion "
